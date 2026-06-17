@@ -1,4 +1,4 @@
-@import "tailwindcss";
+/* @import "tailwindcss";
 
 :root {
   --background: #ffffff;
@@ -23,4 +23,35 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+} */
+
+
+@import "tailwindcss";
+
+:root {
+  --bg-primary: #0a1a0f;
+  --bg-secondary: #0f2318;
+  --bg-card: #122b1a;
+  --bg-card-hover: #163320;
+  --green-bright: #22c55e;
+  --green-mid: #16a34a;
+  --green-dark: #14532d;
+  --green-glow: #4ade80;
+  --gold: #fbbf24;
+  --text-primary: #f0fdf4;
+  --text-secondary: #86efac;
+  --text-muted: #4ade80;
+  --border: #1a3d24;
+  --border-bright: #22c55e40;
+}
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-geist-sans), Arial, sans-serif;
+  min-height: 100vh;
+}
+
+* {
+  border-color: var(--border);
 }
