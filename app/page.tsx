@@ -46,7 +46,7 @@ export default async function Home() {
 
   if (error) {
     return (
-      <main className="min-h-screen flex items-center justify-center bg-[#0a1a0f]">
+      <main className="min-h-screen flex items-center justify-center bg-[#0B0B12]">
         <p className="text-red-400">{error.message}</p>
       </main>
     )
@@ -103,36 +103,55 @@ export default async function Home() {
   return (
     <main
       style={{
-        background: '#0a1a0f',
+        background: '#0B0B12',
         minHeight: '100vh',
       }}
     >
       <div className="max-w-7xl mx-auto px-4 py-8">
 
-        <div className="mb-8">
+        <div
+          style={{
+            background:
+              'linear-gradient(135deg, rgba(139,92,246,.15), rgba(212,175,55,.15))',
+            border: '1px solid rgba(139,92,246,.25)',
+            borderRadius: '24px',
+            padding: '32px',
+            marginBottom: '32px',
+          }}
+        >
           <h1
             style={{
-              color: '#f0fdf4',
+              color: '#F8FAFC',
             }}
-            className="text-3xl font-black"
+            className="text-4xl font-black"
           >
-            ⚽ World Cup AI
+            🏆 NAMKA
           </h1>
 
           <p
             style={{
-              color: '#4ade80',
+              color: '#D4AF37',
             }}
-            className="mt-2 text-sm"
+            className="mt-2 text-sm font-semibold tracking-widest"
           >
-            Predict matches and compete against Tactical AI
+            WORLD CUP CHALLENGE
+          </p>
+
+          <p
+            style={{
+              color: '#A1A1AA',
+            }}
+            className="mt-4"
+          >
+            Compete against Tactical AI, predict matches,
+            and climb the leaderboard.
           </p>
         </div>
 
         <div className="mb-10">
           <h2
             style={{
-              color: '#f0fdf4',
+              color: '#F8FAFC',
             }}
             className="text-xl font-bold mb-4"
           >
@@ -142,13 +161,13 @@ export default async function Home() {
           {next48Hours.length === 0 ? (
             <div
               style={{
-                background: '#0f2318',
-                border: '1px solid #22c55e20',
+                background: '#171721',
+                border: '1px solid rgba(139,92,246,.25)',
                 borderRadius: '16px',
                 padding: '20px',
               }}
             >
-              <p style={{ color: '#86efac' }}>
+              <p style={{ color: '#A1A1AA' }}>
                 No matches in the next 48 hours.
               </p>
             </div>
@@ -168,7 +187,7 @@ export default async function Home() {
           <div className="mt-12">
             <h2
               style={{
-                color: '#f0fdf4',
+                color: '#F8FAFC',
               }}
               className="text-xl font-bold mb-4"
             >
@@ -186,16 +205,16 @@ export default async function Home() {
                     <div
                       key={prediction.id}
                       style={{
-                        background: '#0f2318',
+                        background: '#171721',
                         border:
-                          '1px solid #22c55e20',
+                          '1px solid rgba(139,92,246,.25)',
                         borderRadius: '14px',
                         padding: '14px',
                       }}
                     >
                       <div
                         style={{
-                          color: '#f0fdf4',
+                          color: '#F8FAFC',
                           fontWeight: 700,
                         }}
                       >
@@ -220,7 +239,7 @@ export default async function Home() {
 
                       <div
                         style={{
-                          color: '#86efac',
+                          color: '#A78BFA',
                           fontSize: '13px',
                           marginTop: '6px',
                         }}
@@ -241,10 +260,10 @@ export default async function Home() {
                           fontWeight: 800,
                           color:
                             points === 8
-                              ? '#22c55e'
+                              ? '#D4AF37'
                               : points === 3
-                              ? '#fbbf24'
-                              : '#ef4444',
+                              ? '#A78BFA'
+                              : '#EF4444',
                         }}
                       >
                         +{points} pts
@@ -260,7 +279,7 @@ export default async function Home() {
           <div className="mt-12">
             <h2
               style={{
-                color: '#f0fdf4',
+                color: '#F8FAFC',
               }}
               className="text-xl font-bold mb-4"
             >
@@ -272,16 +291,16 @@ export default async function Home() {
                 <div
                   key={match.id}
                   style={{
-                    background: '#0f2318',
+                    background: '#171721',
                     border:
-                      '1px solid #22c55e20',
+                      '1px solid rgba(139,92,246,.25)',
                     borderRadius: '14px',
                     padding: '14px',
                   }}
                 >
                   <div
                     style={{
-                      color: '#f0fdf4',
+                      color: '#F8FAFC',
                       fontWeight: 700,
                     }}
                   >
@@ -296,7 +315,7 @@ export default async function Home() {
 
                   <div
                     style={{
-                      color: '#86efac',
+                      color: '#A1A1AA',
                       fontSize: '12px',
                       marginTop: '6px',
                     }}
@@ -310,7 +329,7 @@ export default async function Home() {
                   <div
                     style={{
                       marginTop: '8px',
-                      color: '#fbbf24',
+                      color: '#D4AF37',
                       fontWeight: 700,
                       fontSize: '12px',
                     }}

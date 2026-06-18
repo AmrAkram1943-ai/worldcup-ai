@@ -1,5 +1,7 @@
 'use client'
+
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase'
 
 type Props = {
@@ -25,6 +27,8 @@ export default function PredictionForm({
   kickoffTime,
   existingPrediction,
 }: Props) {
+  const router = useRouter()
+
   const [homeScore, setHomeScore] = useState(
     existingPrediction?.predicted_home_score ?? 0
   )
@@ -41,12 +45,15 @@ export default function PredictionForm({
 
   const [error, setError] = useState('')
 
+  const [success, setSuccess] = useState('')
+
   const isLocked =
     new Date() >= new Date(kickoffTime)
 
   async function handleSubmit() {
     setLoading(true)
     setError('')
+    setSuccess('')
 
     const supabase = createClient()
 
@@ -61,6 +68,8 @@ export default function PredictionForm({
     }
 
     try {
+      const wasUpdate = submitted
+
       const { error: dbError } =
         await supabase
           .from('user_predictions')
@@ -68,14 +77,11 @@ export default function PredictionForm({
             {
               user_id: user.id,
               match_id: matchId,
-              predicted_home_score:
-                homeScore,
-              predicted_away_score:
-                awayScore,
+              predicted_home_score: homeScore,
+              predicted_away_score: awayScore,
             },
             {
-              onConflict:
-                'user_id,match_id',
+              onConflict: 'user_id,match_id',
             }
           )
 
@@ -83,6 +89,14 @@ export default function PredictionForm({
         setError(dbError.message)
       } else {
         setSubmitted(true)
+
+        setSuccess(
+          wasUpdate
+            ? 'Prediction updated successfully ✅'
+            : 'Prediction submitted successfully ✅'
+        )
+
+        router.refresh()
       }
     } catch {
       setError('Network error')
@@ -95,20 +109,21 @@ export default function PredictionForm({
     return (
       <div
         style={{
-          marginTop: '12px',
-          padding: '10px',
-          background: '#1a0a0a',
+          marginTop: '16px',
+          padding: '12px',
+          background:
+            'rgba(212,175,55,.08)',
           border:
-            '1px solid #ef444440',
-          borderRadius: '10px',
+            '1px solid rgba(212,175,55,.25)',
+          borderRadius: '12px',
           textAlign: 'center',
         }}
       >
         <span
           style={{
-            color: '#f87171',
-            fontSize: '12px',
-            fontWeight: '600',
+            color: '#D4AF37',
+            fontSize: '13px',
+            fontWeight: '700',
           }}
         >
           🔒 Predictions Closed
@@ -118,50 +133,65 @@ export default function PredictionForm({
   }
 
   const btnStyle = {
-    width: '28px',
-    height: '28px',
+    width: '36px',
+    height: '36px',
     borderRadius: '50%',
-    background: '#0a1a0f',
-    border: '1px solid #22c55e40',
-    color: '#22c55e',
-    fontWeight: '700',
-    fontSize: '16px',
+    background: '#171721',
+    border:
+      '1px solid rgba(139,92,246,.35)',
+    color: '#D4AF37',
+    fontWeight: '900',
+    fontSize: '18px',
     cursor: 'pointer',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    transition: 'all .2s ease',
   }
 
   return (
     <div
       style={{
-        marginTop: '12px',
-        paddingTop: '12px',
+        marginTop: '16px',
+        paddingTop: '16px',
         borderTop:
-          '1px solid #22c55e15',
+          '1px solid rgba(139,92,246,.15)',
       }}
     >
-      <div className="flex items-center justify-center gap-8">
+      <div
+        style={{
+          textAlign: 'center',
+          marginBottom: '16px',
+          color: '#D4AF37',
+          fontWeight: 800,
+          fontSize: '13px',
+          letterSpacing: '.5px',
+        }}
+      >
+        🎯 Your Match Prediction
+      </div>
 
+      <div className="flex items-center justify-center gap-10">
         <div className="flex flex-col items-center">
-          <div className="flex items-center gap-2 mb-2">
+          <div className="flex items-center gap-2 mb-3">
             <img
               src={homeFlag}
               alt={homeTeam}
-              className="w-4 h-4 object-contain"
+              className="w-5 h-5 object-contain"
             />
 
             <span
               style={{
-                color: '#86efac',
-                fontSize: '11px',
+                color: '#A78BFA',
+                fontSize: '12px',
+                fontWeight: '700',
               }}
             >
               {homeTeam}
             </span>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
             <button
               style={btnStyle}
               onClick={() =>
@@ -175,10 +205,10 @@ export default function PredictionForm({
 
             <span
               style={{
-                color: '#f0fdf4',
-                fontSize: '22px',
+                color: '#F8FAFC',
+                fontSize: '28px',
                 fontWeight: '900',
-                minWidth: '24px',
+                minWidth: '30px',
                 textAlign: 'center',
               }}
             >
@@ -198,33 +228,34 @@ export default function PredictionForm({
 
         <span
           style={{
-            color: '#22c55e60',
-            fontSize: '18px',
+            color: '#D4AF37',
+            fontSize: '24px',
             fontWeight: '900',
           }}
         >
-          –
+          :
         </span>
 
         <div className="flex flex-col items-center">
-          <div className="flex items-center gap-2 mb-2">
+          <div className="flex items-center gap-2 mb-3">
             <img
               src={awayFlag}
               alt={awayTeam}
-              className="w-4 h-4 object-contain"
+              className="w-5 h-5 object-contain"
             />
 
             <span
               style={{
-                color: '#86efac',
-                fontSize: '11px',
+                color: '#A78BFA',
+                fontSize: '12px',
+                fontWeight: '700',
               }}
             >
               {awayTeam}
             </span>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
             <button
               style={btnStyle}
               onClick={() =>
@@ -238,10 +269,10 @@ export default function PredictionForm({
 
             <span
               style={{
-                color: '#f0fdf4',
-                fontSize: '22px',
+                color: '#F8FAFC',
+                fontSize: '28px',
                 fontWeight: '900',
-                minWidth: '24px',
+                minWidth: '30px',
                 textAlign: 'center',
               }}
             >
@@ -263,13 +294,27 @@ export default function PredictionForm({
       {error && (
         <p
           style={{
-            color: '#f87171',
+            color: '#EF4444',
             fontSize: '12px',
             textAlign: 'center',
-            marginTop: '8px',
+            marginTop: '12px',
           }}
         >
           {error}
+        </p>
+      )}
+
+      {success && (
+        <p
+          style={{
+            color: '#D4AF37',
+            fontSize: '12px',
+            textAlign: 'center',
+            marginTop: '12px',
+            fontWeight: '700',
+          }}
+        >
+          {success}
         </p>
       )}
 
@@ -277,27 +322,28 @@ export default function PredictionForm({
         onClick={handleSubmit}
         disabled={loading}
         style={{
-          marginTop: '12px',
+          marginTop: '18px',
           width: '100%',
-          background:
-            loading
-              ? '#14532d'
-              : 'linear-gradient(135deg,#16a34a,#22c55e)',
-          color: '#f0fdf4',
-          fontWeight: '700',
-          padding: '10px',
-          borderRadius: '10px',
+          background: loading
+            ? '#27272A'
+            : 'linear-gradient(135deg,#8B5CF6,#D4AF37)',
+          color: '#FFFFFF',
+          fontWeight: '800',
+          padding: '12px',
+          borderRadius: '12px',
           border: 'none',
-          fontSize: '13px',
+          fontSize: '14px',
           cursor: loading
             ? 'not-allowed'
             : 'pointer',
+          boxShadow:
+            '0 8px 20px rgba(139,92,246,.25)',
         }}
       >
         {loading
           ? 'Saving...'
-          : existingPrediction
-          ? '✏️ Update Prediction'
+          : submitted
+          ? '🔄 Update Prediction'
           : '⚡ Submit Prediction'}
       </button>
     </div>

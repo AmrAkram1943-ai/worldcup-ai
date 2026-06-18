@@ -55,24 +55,29 @@ export default function MatchCard({
     <div
       style={{
         background:
-          'linear-gradient(135deg,#122b1a 0%,#0f2318 100%)',
-        border: '1px solid #22c55e25',
-        borderRadius: '16px',
+          'linear-gradient(135deg,#171721 0%,#101018 100%)',
+        border:
+          '1px solid rgba(139,92,246,.25)',
+        borderRadius: '18px',
         overflow: 'hidden',
+        boxShadow:
+          '0 10px 30px rgba(0,0,0,.25)',
       }}
-      className="p-4 hover:border-green-500/40 transition-all duration-300"
+      className="p-5 transition-all duration-300 hover:scale-[1.01]"
     >
-      <div className="flex justify-between items-center mb-3">
-        <div className="flex items-center gap-2">
+      <div className="flex justify-between items-center mb-4">
+        <div className="flex items-center gap-2 flex-wrap">
           <span
             style={{
-              background: '#22c55e15',
-              color: '#4ade80',
-              border: '1px solid #22c55e30',
+              background:
+                'rgba(212,175,55,.12)',
+              color: '#D4AF37',
+              border:
+                '1px solid rgba(212,175,55,.25)',
               borderRadius: '20px',
-              padding: '3px 10px',
+              padding: '4px 10px',
               fontSize: '11px',
-              fontWeight: '700',
+              fontWeight: '800',
             }}
           >
             🏆 {match.round}
@@ -81,8 +86,9 @@ export default function MatchCard({
           {match.group_name && (
             <span
               style={{
-                color: '#86efac',
+                color: '#A78BFA',
                 fontSize: '11px',
+                fontWeight: 700,
               }}
             >
               {match.group_name}
@@ -92,9 +98,9 @@ export default function MatchCard({
 
         <span
           style={{
-            color: '#fbbf24',
+            color: '#D4AF37',
             fontSize: '11px',
-            fontWeight: '700',
+            fontWeight: '800',
           }}
         >
           ⏳ {hours}h {minutes}m
@@ -106,12 +112,12 @@ export default function MatchCard({
           <img
             src={match.home_flag}
             alt={match.home_team}
-            className="w-12 h-12 object-contain"
+            className="w-14 h-14 object-contain"
           />
 
           <span
             style={{
-              color: '#f0fdf4',
+              color: '#F8FAFC',
             }}
             className="font-bold text-sm text-center mt-2"
           >
@@ -122,8 +128,8 @@ export default function MatchCard({
         <div className="flex flex-col items-center">
           <div
             style={{
-              color: '#22c55e',
-              fontSize: '20px',
+              color: '#D4AF37',
+              fontSize: '24px',
               fontWeight: '900',
             }}
           >
@@ -132,27 +138,33 @@ export default function MatchCard({
 
           <div
             style={{
-              color: '#86efac',
+              color: '#A78BFA',
               fontSize: '11px',
               marginTop: '4px',
             }}
           >
-            {kickoff.toLocaleDateString('en-US', {
-              month: 'short',
-              day: 'numeric',
-            })}
+            {kickoff.toLocaleDateString(
+              'en-US',
+              {
+                month: 'short',
+                day: 'numeric',
+              }
+            )}
           </div>
 
           <div
             style={{
-              color: '#4ade8080',
+              color: '#A1A1AA',
               fontSize: '10px',
             }}
           >
-            {kickoff.toLocaleTimeString('ar-EG', {
-              hour: '2-digit',
-              minute: '2-digit',
-            })}
+            {kickoff.toLocaleTimeString(
+              'ar-EG',
+              {
+                hour: '2-digit',
+                minute: '2-digit',
+              }
+            )}
           </div>
         </div>
 
@@ -160,12 +172,12 @@ export default function MatchCard({
           <img
             src={match.away_flag}
             alt={match.away_team}
-            className="w-12 h-12 object-contain"
+            className="w-14 h-14 object-contain"
           />
 
           <span
             style={{
-              color: '#f0fdf4',
+              color: '#F8FAFC',
             }}
             className="font-bold text-sm text-center mt-2"
           >
@@ -177,30 +189,32 @@ export default function MatchCard({
       {match.user_prediction && (
         <div
           style={{
-            marginTop: '14px',
-            background: '#14532d30',
-            border: '1px solid #22c55e40',
-            borderRadius: '10px',
-            padding: '10px',
+            marginTop: '16px',
+            background:
+              'rgba(139,92,246,.10)',
+            border:
+              '1px solid rgba(139,92,246,.25)',
+            borderRadius: '12px',
+            padding: '12px',
             textAlign: 'center',
           }}
         >
           <div
             style={{
-              color: '#4ade80',
-              fontWeight: '700',
+              color: '#A78BFA',
+              fontWeight: '800',
               fontSize: '12px',
             }}
           >
-            ✅ You Submitted
+            ✅ Your Prediction
           </div>
 
           <div
             style={{
-              color: '#f0fdf4',
-              fontSize: '16px',
+              color: '#F8FAFC',
+              fontSize: '20px',
               fontWeight: '900',
-              marginTop: '4px',
+              marginTop: '6px',
             }}
           >
             {match.user_prediction.predicted_home_score}
@@ -213,27 +227,97 @@ export default function MatchCard({
       {ai && (
         <div
           style={{
-            marginTop: '14px',
-            background: '#0a1a0f',
-            border: '1px solid #22c55e20',
-            borderRadius: '10px',
-            padding: '10px',
-            textAlign: 'center',
+            marginTop: '16px',
+            background: '#0B0B12',
+            border:
+              '1px solid rgba(139,92,246,.20)',
+            borderRadius: '12px',
+            padding: '14px',
           }}
         >
           <div
             style={{
-              color: '#c4b5fd',
-              fontSize: '12px',
-              fontWeight: '700',
+              color: '#D4AF37',
+              fontWeight: '800',
+              textAlign: 'center',
+              fontSize: '13px',
             }}
           >
-            🤖 Tactical AI predicts{' '}
-            {ai.predicted_home_score}-
-            {ai.predicted_away_score}
-            {' '}
-            ({ai.confidence_pct}%)
+            🤖 Tactical AI Prediction
           </div>
+
+          <div
+            style={{
+              color: '#F8FAFC',
+              fontSize: '22px',
+              fontWeight: '900',
+              textAlign: 'center',
+              marginTop: '8px',
+            }}
+          >
+            {ai.predicted_home_score}
+            {' - '}
+            {ai.predicted_away_score}
+          </div>
+
+          <div
+            style={{
+              color: '#A78BFA',
+              textAlign: 'center',
+              fontSize: '12px',
+              marginTop: '6px',
+            }}
+          >
+            Confidence: {ai.confidence_pct}%
+          </div>
+
+          <div
+            style={{
+              height: '8px',
+              background:
+                'rgba(255,255,255,.08)',
+              borderRadius: '999px',
+              marginTop: '10px',
+              overflow: 'hidden',
+            }}
+          >
+            <div
+              style={{
+                width: `${ai.confidence_pct}%`,
+                height: '100%',
+                background:
+                  'linear-gradient(90deg,#D4AF37,#FCD34D)',
+              }}
+            />
+          </div>
+
+          <details
+            style={{
+              marginTop: '14px',
+            }}
+          >
+            <summary
+              style={{
+                cursor: 'pointer',
+                color: '#D4AF37',
+                fontWeight: 700,
+                fontSize: '13px',
+              }}
+            >
+              🧠 AI Analysis
+            </summary>
+
+            <p
+              style={{
+                color: '#A1A1AA',
+                fontSize: '13px',
+                lineHeight: '1.8',
+                marginTop: '12px',
+              }}
+            >
+              {ai.analysis}
+            </p>
+          </details>
         </div>
       )}
 

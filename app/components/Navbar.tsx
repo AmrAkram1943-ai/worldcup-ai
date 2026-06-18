@@ -1,32 +1,84 @@
+import Image from 'next/image'
 import Link from 'next/link'
 
 export default function Navbar() {
   return (
-    <nav style={{
-      background: 'linear-gradient(180deg, #0a1a0f 0%, #0f2318 100%)',
-      borderBottom: '1px solid #22c55e30',
-    }} className="sticky top-0 z-10">
-      <div className="max-w-2xl mx-auto px-4 py-4 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2">
-          <span className="text-2xl">⚽</span>
+    <nav
+      style={{
+        background:
+          'linear-gradient(180deg, #171721 0%, #0B0B12 100%)',
+        borderBottom: '1px solid rgba(139,92,246,.25)',
+        backdropFilter: 'blur(10px)',
+      }}
+      className="sticky top-0 z-50"
+    >
+      <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+        <Link
+          href="/"
+          className="flex items-center gap-3"
+        >
+          <Image
+            src="/Namka_Logo_Transparent.png"
+            alt="NAMKA Logo"
+            width={100}
+            height={42}
+            className="object-contain"
+            priority
+          />
+
           <div>
-            <p style={{ color: '#22c55e' }} className="font-bold text-lg leading-none">
-              WorldCup AI
+            <p
+              style={{
+                color: '#F8FAFC',
+              }}
+              className="font-black text-xl leading-none"
+            >
+              NAMKA
             </p>
-            <p style={{ color: '#4ade8080', fontSize: '10px' }}>
-              Humans vs AI · 2026
+
+            <p
+              style={{
+                color: '#D4AF37',
+                fontSize: '11px',
+                letterSpacing: '.12em',
+              }}
+            >
+              WORLD CUP CHALLENGE
             </p>
           </div>
         </Link>
 
-        <div className="flex items-center gap-1">
-          <Link href="/" style={{ color: '#86efac' }}
-            className="text-sm px-4 py-2 rounded-lg hover:bg-green-900/30 transition-colors">
-            Matches
+        <div className="flex items-center gap-2">
+          <Link
+            href="/"
+            style={{
+              color: '#F8FAFC',
+            }}
+            className="text-sm px-4 py-2 rounded-xl hover:bg-white/5 transition-all duration-300"
+          >
+            ⚽ Matches
           </Link>
-          <Link href="/leaderboard" style={{ color: '#86efac' }}
-            className="text-sm px-4 py-2 rounded-lg hover:bg-green-900/30 transition-colors">
+
+          <Link
+            href="/leaderboard"
+            style={{
+              background:
+                'linear-gradient(135deg,#8B5CF6,#D4AF37)',
+              color: '#fff',
+            }}
+            className="text-sm px-4 py-2 rounded-xl font-bold transition-all duration-300 hover:scale-105"
+          >
             🏆 Leaderboard
+          </Link>
+
+          <Link
+            href="/logout"
+            style={{
+              color: '#A1A1AA',
+            }}
+            className="text-sm px-4 py-2 rounded-xl hover:bg-white/5 transition-all duration-300"
+          >
+            🚪 Logout
           </Link>
         </div>
       </div>
