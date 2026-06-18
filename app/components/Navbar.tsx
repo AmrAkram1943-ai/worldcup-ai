@@ -12,49 +12,49 @@ export default function Navbar() {
       }}
       className="sticky top-0 z-50"
     >
-      <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 py-4 flex items-center justify-between gap-2">
         <Link
           href="/"
-          className="flex items-center gap-3"
+          className="flex items-center gap-2 sm:gap-3 flex-shrink-0"
         >
           <Image
             src="/Namka_Logo_Transparent.png"
             alt="NAMKA Logo"
             width={100}
             height={42}
-            className="object-contain"
+            className="object-contain w-[70px] sm:w-[100px] h-auto"
             priority
           />
 
-          <div>
-            <p
-              style={{
-                color: '#F8FAFC',
-              }}
-              className="font-black text-xl leading-none"
-            >
-              NAMKA
-            </p>
+<div>
+  <p
+    style={{
+      color: '#F8FAFC',
+    }}
+    className="font-black text-sm sm:text-xl leading-none"
+  >
+    NAMKA
+  </p>
 
-            <p
-              style={{
-                color: '#D4AF37',
-                fontSize: '11px',
-                letterSpacing: '.12em',
-              }}
-            >
-              WORLD CUP CHALLENGE
-            </p>
-          </div>
+  <p
+    style={{
+      color: '#D4AF37',
+      letterSpacing: '.12em',
+    }}
+    className="text-[8px] sm:text-[11px]"
+  >
+    WORLD CUP CHALLENGE
+  </p>
+</div>
         </Link>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1 sm:gap-2">
           <Link
             href="/"
             style={{
               color: '#F8FAFC',
             }}
-            className="text-sm px-4 py-2 rounded-xl hover:bg-white/5 transition-all duration-300"
+            className="text-xs sm:text-sm px-2 sm:px-4 py-2 rounded-xl hover:bg-white/5 transition-all duration-300"
           >
             ⚽ Matches
           </Link>
@@ -66,7 +66,7 @@ export default function Navbar() {
                 'linear-gradient(135deg,#8B5CF6,#D4AF37)',
               color: '#fff',
             }}
-            className="text-sm px-4 py-2 rounded-xl font-bold transition-all duration-300 hover:scale-105"
+            className="text-xs sm:text-sm px-2 sm:px-4 py-2 rounded-xl font-bold transition-all duration-300 hover:scale-105"
           >
             🏆 Leaderboard
           </Link>
@@ -76,7 +76,7 @@ export default function Navbar() {
             style={{
               color: '#A1A1AA',
             }}
-            className="text-sm px-4 py-2 rounded-xl hover:bg-white/5 transition-all duration-300"
+            className="text-xs sm:text-sm px-2 sm:px-4 py-2 rounded-xl hover:bg-white/5 transition-all duration-300"
           >
             🚪 Logout
           </Link>
